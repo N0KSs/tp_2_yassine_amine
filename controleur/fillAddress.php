@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $listValues = [];
 $numAddress = $_SESSION['TMP_NUMADR'];
 
@@ -30,6 +34,21 @@ for ($i = 0; $i < $numAddress; $i++) {
     $section .= '<div></div> <div style="align-self: center;"><h1> Address ' . ($i+1) . '</h1></div>';
 
     // ... (Form fields are generated here)
+    $section .= ' <label for="' . $i . ':streetNumber">Street Number : </label>
+    <input id="' . $i . ':streetNumber" name="form[' . $i . ':streetNumber]" type="number" placeholder="0" value="' . $_POST["form"][$i . ":streetNumber"] . '" />';
+
+    $section .= ' <label for="' . $i . ':streetName">Street Name : </label>
+    <input id="' . $i . ':streetName" name="form[' . $i . ':streetName]" type="text" placeholder="Rue des coquelicots" value="' . $_POST["form"][$i . ":streetName"] . '" />';
+
+    $section .= ' <label for="' . $i . ':streetType">Street Type : </label>
+    <input list="typeList" id="' . $i . ':streetType" name="form[' . $i . ':streetType]" type="select" placeholder="Type" value="' . $_POST["form"][$i . ":streetType"] . '" />';
+
+    $section .= ' <label for="' . $i . ':city">City : </label>
+    <input list="cityList" id="' . $i . ':city" name="form[' . $i . ':city]" type="select" placeholder="City" value="' . $_POST["form"][$i . ":city"] . '" />';
+
+    $section .= ' <label for="' . $i . ':zipCode">Zip Code : </label>
+    <input id="' . $i . ':zipCode" name="form[' . $i . ':zipCode]" type="text" placeholder="00000" value="' . $_POST["form"][$i . ":zipCode"] . '"/>';
+
 
     $lignes[] = $section . "</section><br\>";
 }
